@@ -1,1 +1,100 @@
-docs/fase1_analisis.md
+### 🥬 Fase 1: Análisis de Interfaz — EcoHuerta
+
+## 🗺️ Mapa de secciones
+
+| Sección | Descripción / Función |
+|----------|------------------------|
+| **Header** | Contiene el logotipo y la barra de navegación principal. Permite acceder rápidamente a las distintas secciones del sitio. |
+| **Hero** | Presentación principal con mensaje de bienvenida, imagen o ilustración representativa de la huerta ecológica. Busca captar la atención inicial del usuario. |
+| **Grid de cultivos** | Muestra diferentes tipos de cultivos o plantas en formato de tarjetas. Facilita la exploración visual y comparativa de especies. |
+| **Seasons (Temporadas)** | Explica qué se cultiva en cada estación del año, ayudando a planificar siembras sostenibles. |
+| **Testimonials** | Incluye opiniones o experiencias de usuarios satisfechos, reforzando la confianza y credibilidad del proyecto. |
+| **CTA (Call To Action)** | Sección con un botón o enlace destacado que invita a una acción concreta: registrarse, donar o unirse a la comunidad. |
+| **Contacto** | Formulario o información para comunicarse con el equipo de EcoHuerta (correo, redes, ubicación). |
+| **Suscripción** | Campo para ingresar el correo y recibir boletines o noticias de sostenibilidad. |
+| **Footer** | Pie de página con enlaces secundarios, derechos reservados y redes sociales. |
+
+## 🎨 Inventario de Tokens (@theme)
+
+| Grupo | Variables | Propósito |
+|--------|------------|-----------|
+| **Colores** | `primary`, `secondary`, `accent`, `neutral`, `success`, `warning`, `error`, `background`, `surface` | Mantener coherencia cromática entre secciones. El verde domina como color semántico de sostenibilidad y crecimiento. Los tonos tierra acompañan para dar naturalidad. |
+| **Fuentes** | `font-sans`, `font-serif`, `font-display` | Diferenciar jerarquías tipográficas: títulos con fuentes display o serif, cuerpo con sans-serif para legibilidad. |
+| **Breakpoints** | `sm`, `md`, `lg`, `xl` | Asegurar diseño responsive. Permiten ajustar grid, padding y tamaño de texto según el ancho del dispositivo. |
+| **Espaciados y radios** | `spacing`, `borderRadius` | Definen consistencia en márgenes, paddings y esquinas redondeadas suaves, transmitiendo armonía visual. |
+
+## ⚙️ Utilidades por Sección (Tailwind)
+
+### 1. Hero
+- **Layout:** `flex`, `items-center`, `justify-between`, `gap-8`
+- **Color:** `bg-green-100 dark:bg-green-900`
+- **Tipografía:** `text-4xl font-bold`, `text-gray-700 dark:text-gray-200`
+- **Efecto:** Centra contenido y mejora contraste en modo oscuro. Refuerza el mensaje principal con jerarquía visual clara.
+
+### 2. Grid de cultivos
+- **Layout:** `grid grid-cols-1 md:grid-cols-3 gap-6`
+- **Espaciado:** `p-6`, `m-auto`
+- **Color:** `bg-white dark:bg-gray-800`, `shadow-md hover:shadow-lg`
+- **Efecto:** Mantiene equilibrio entre imágenes y texto, adaptable a pantallas pequeñas. Mejora legibilidad y consistencia.
+
+### 3. CTA (Call To Action)
+- **Layout:** `flex flex-col items-center text-center`
+- **Botón:** `bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg`
+- **Efecto:** El contraste y tamaño del botón fomentan la acción. Los estados hover mejoran la accesibilidad visual.
+
+## 🌙 Dark Mode
+
+### Implementación
+- Se activa mediante la clase `.dark` en el elemento raíz (`<html>` o `<body>`).
+- Tailwind detecta las variantes `dark:` en utilidades, aplicando colores alternativos.
+
+### Efectos visuales
+- Fondo pasa de claro a oscuro (`bg-white → bg-gray-900`).
+- Texto se aclara para mantener contraste (`text-gray-800 → text-gray-100`).
+- Los acentos verdes se mantienen para preservar identidad visual.
+
+### Ventajas de usar `.dark`
+- Mayor control manual del modo oscuro.
+- Permite previsualizar o fijar temas desde un botón, sin depender de la preferencia del sistema.
+- Facilita pruebas y personalización por parte del usuario.
+
+## 🧩 Componentes Reutilizables (@layer components)
+
+| Componente | Uso | Beneficio |
+|-------------|-----|-----------|
+| **Botones (`.btn`, `.btn-primary`)** | En el CTA, formularios y secciones interactivas. | Consistencia visual, mismo radio y transición. |
+| **Tarjetas (`.card`)** | En el grid de cultivos y testimonios. | Facilitan lectura y agrupan información en bloques homogéneos. |
+| **Badges (`.badge`)** | Para destacar etiquetas como “Orgánico” o “Temporada”. | Mejoran comprensión visual rápida. |
+| **Inputs (`.input`, `.input-text`)** | Formularios de contacto y suscripción. | Aseguran estilos coherentes, accesibles y responsivos. |
+
+##  Accesibilidad Visual
+
+| Aspecto | Evaluación |
+|----------|-------------|
+| **Contraste** | Correcto en la mayoría de los textos. En modo claro, algunos textos sobre fondo verde podrían requerir más contraste. |
+| **Jerarquía tipográfica** | Clara, gracias a diferencias de tamaño y peso. |
+| **Foco visible** | Botones e inputs muestran borde o sombra en foco (`focus:ring-2 focus:ring-green-500`). |
+| **Etiquetas/atributos** | Formularios usan `label for` y `aria-label` en iconos. |
+| **Propuesta de mejora** | Aumentar contraste mínimo a 4.5:1 en textos secundarios sobre fondos verdes o grises. Implementar lector de pantalla para imágenes decorativas con `alt=""`. |
+
+
+## (markdown) Propuesta de Mejora Conceptual
+
+### Nueva Sección: Glosario de Cultivos
+
+Objetivo:  
+Facilitar el aprendizaje de términos agrícolas y ecológicos para visitantes no especializados.
+
+Contenido:  
+- Definiciones breves y visuales de tipos de cultivos, prácticas sostenibles y conceptos ecológicos.  
+- Búsqueda o filtrado por categorías (frutas, hortalizas, legumbres, hierbas).  
+
+**Estructura Visual:**  
+- Título destacado.  
+- Barra de búsqueda (`input + icono`).  
+- Tarjetas (`.card`) con nombre, imagen y definición.  
+- Colores suaves (`bg-green-50` / `dark:bg-green-950`) y texto legible.  
+
+**Beneficio:**  
+Promueve el componente educativo de EcoHuerta y aumenta el tiempo de permanencia del usuario en el sitio.
+
